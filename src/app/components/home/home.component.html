@@ -15,6 +15,15 @@
         <div class="col-3">
           <p class="text-left mb-0">{{ filteredProducts.length }} items found</p>
         </div>
+        <!-- Sorting options -->
+        <div class="d-flex align-items-center">
+          <select (change)="sortProducts($event)" id="sortOptions" class="form-select">
+            <option value="default">Sort by: Product Id</option>
+            <option value="priceAsc">Sort by: Price: Low to High</option>
+            <option value="priceDesc">Sort by: Price: High to Low</option>
+            <option value="ratingDesc">Sort by: Avg. customer Review</option>
+          </select>
+        </div>
       </div>
 
       <div class="row">
