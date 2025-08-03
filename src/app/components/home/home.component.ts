@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../models/product.model';
 import { ProductCardComponent } from '../product-card/product-card.component';
+import { ɵEmptyOutletComponent } from "../../../../node_modules/.pnpm/@angular+router@19.2.14_@angular+common@19.2.14_@angular+core@19.2.14_rxjs@7.8.2_zone.j_b1fb2ad783a3c30be36248ed8d35f66d/node_modules/@angular/router/router_module.d-Bx9ArA6K";
 
 @Component({
   selector: 'app-home',
@@ -188,8 +189,12 @@ export class HomeComponent {
     },
   ];
 
+  public filteredProducts: Product[] = [];
+  public selectedCategory: string = '';
+
   constructor() {
     this.productList = this.markNewProducts(this.productList);
+    this.filteredProducts = this.productList;
   }
 
   public trackByIndex(index: number, item: any): number {
@@ -206,5 +211,17 @@ export class HomeComponent {
       product.isNew = releaseDate > threeMonthAgo;
       return product;
     });
+  }
+
+  public filterCategory(category: string): void {
+    if (this.selectedCategory === category) {
+      this.selectedCategory = '';
+      this.filteredProducts = this.productList;
+    } else {
+      this.selectedCategory = category;
+      this.filteredProducts = this.productList.filter(
+        (product) => product.category === category
+      );
+    }
   }
 }
