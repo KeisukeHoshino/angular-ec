@@ -40,7 +40,18 @@ export class AppComponent {
     return index;
   }
 
-  public removeProduct(index: number) :void {
-    this.cartItems.splice(index, 1)
+  public removeProduct(index: number): void {
+    this.cartItems.splice(index, 1);
+  }
+
+  public getTotalQuantity(): number {
+    return this.cartItems.length;
+  }
+
+  public getTotalPrice(): number {
+    return this.cartItems.reduce(
+      (total, item) => total + Number(item.price),
+      0
+    );
   }
 }
